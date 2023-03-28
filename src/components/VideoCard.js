@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Dropdown, Modal } from "antd";
-import { EllipsisOutlined } from "@ant-design/icons";
+// import { EllipsisOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import YouTube from "react-youtube";
 import {
@@ -16,6 +16,7 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
   const [isModalOpen, setIsModalOpen] = useState({
     viewer: false,
     editor: false,
+    history: false,
   });
   const [inputData, setInputData] = useState({
     name: data.name,
@@ -47,7 +48,7 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
         ...isModalOpen,
         editor: true,
       });
-    } else {
+    } else if (type === "viewer") {
       setIsModalOpen({
         ...isModalOpen,
         viewer: true,
@@ -60,6 +61,11 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
           link: data.link,
         })
       );
+    } else {
+      setIsModalOpen({
+        ...isModalOpen,
+        history: true,
+      });
     }
   };
 
@@ -67,6 +73,7 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
     setIsModalOpen({
       editor: false,
       viewer: false,
+      history: false,
     });
     dispatch(
       renameCard({
@@ -86,6 +93,7 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
     setIsModalOpen({
       viewer: false,
       editor: false,
+      history: false,
     });
     setInputData({
       name: data.name,
@@ -100,7 +108,6 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
     });
   };
 
-  console.log(inputData);
   return (
     <>
       <div className="video-card">
@@ -132,7 +139,7 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
         </Button>
       </div>
       <Modal
-        title="Basic Modal"
+        title="Edit Card"
         open={isModalOpen.editor}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -154,6 +161,15 @@ const VideoCard = ({ data, name, category, items, setActiveCardData }) => {
         width={700}
         title="Video Viewer"
         open={isModalOpen.viewer}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
+      </Modal>
+      <Modal
+        width={700}
+        title="Video Viewer"
+        open={isModalOpen.history}
         onOk={handleOk}
         onCancel={handleCancel}
       >

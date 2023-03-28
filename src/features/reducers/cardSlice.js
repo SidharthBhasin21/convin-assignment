@@ -8,18 +8,28 @@ const initialState = {
       data: [
         {
           id: uuid(),
-          name: "1 some video",
-          link: "https: //shubambhasin.com",
+          name: "Learn React 3D animations",
+          link: "https://www.youtube.com/watch?v=IyBhFma4H1A&t=3186s",
         },
         {
           id: uuid(),
-          name: "2 some video",
-          link: "https: //shubambhasin.com",
+          name: "Learn Vite – Frontend Build Tool Course",
+          link: "https://www.youtube.com/watch?v=VAeRhmpcWEQ",
         },
         {
           id: uuid(),
-          name: "3 some video",
-          link: "https://shubambhasin.com",
+          name: "Learn React 18 with Redux Toolkit – Full Tutorial for Beginners",
+          link: "https://www.youtube.com/watch?v=2-crBg6wpp0&t=14654s",
+        },
+        {
+          id: uuid(),
+          name: "Harvard CS50’s Web Programming with Python and JavaScript",
+          link: "https://www.youtube.com/watch?v=vzGllw18DkA&t=43s",
+        },
+        {
+          id: uuid(),
+          name: "Full HTTP Networking Course – Fetch and REST APIs in JavaScript",
+          link: "https://www.youtube.com/watch?v=2JYT5f2isg4",
         },
       ],
     },
@@ -29,18 +39,28 @@ const initialState = {
       data: [
         {
           id: uuid(),
-          name: "1 motivation Video",
-          link: "https: //shubambhasin.com",
+          name: "DON'T MAKE EXCUSES - Motivational Speech",
+          link: "https://www.youtube.com/watch?v=PGRlbzi2o9Y",
         },
         {
           id: uuid(),
-          name: "2  video",
-          link: "https: //shubambhasin.com",
+          name: "STOP DOUBTING YOURSELF - Best Motivational Video",
+          link: "https://www.youtube.com/watch?v=Gs3BDvHDUfM",
         },
         {
           id: uuid(),
-          name: "3 some video",
-          link: "https://shubambhasin.com",
+          name: "How To Stay Motivated - The Locus Rule",
+          link: "https://www.youtube.com/watch?v=8ZhoeSaPF-k",
+        },
+        {
+          id: uuid(),
+          name: "LION MENTALITY - Motivational Video",
+          link: "https://www.youtube.com/watch?v=ERClHCOF14c",
+        },
+        {
+          id: uuid(),
+          name: "I WON'T QUIT - Motivational Speech",
+          link: "https://www.youtube.com/watch?v=K714ZvMw60g",
         },
       ],
     },

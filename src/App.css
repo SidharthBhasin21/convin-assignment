@@ -1,8 +1,33 @@
+body{
+  text-align: center;
+}
+.history-btn{
+  position: absolute;
+  right: 10px;
+  top:20px
+}
+.category-input{
+  width: 50%;
+}
 .video-container{
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
   justify-content: space-around;
+}
+.categories-container{
+  display: flex;
+  list-style-type: none;
+  font-weight: bold;
+  margin: 10px;
+}
+.categories{
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgb(237, 236, 236);
+  margin-left: 5px;
+  cursor: pointer;
 }
 .video-card{
   width: 200px;
@@ -13,4 +38,8 @@
   margin: .4rem;
   border: 1px solid black;
   border-radius: .7rem;
+}
+.history-container{
+  display: flex;
+  justify-content: space-between;
 }

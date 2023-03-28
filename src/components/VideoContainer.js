@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import VideoCard from "./VideoCard";
 import { useSelector, useDispatch } from "react-redux";
+import dayjs from "dayjs";
+import { Button, Modal, Input } from "antd";
+import { HistoryOutlined } from "@ant-design/icons";
 import { v4 as uuid } from "uuid";
 import {
   moveCardToCategory,
@@ -10,18 +13,22 @@ import {
 const VideoContainer = () => {
   const ref = useRef();
   const dispatch = useDispatch();
+  const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
   const [tempCategoryName, setTempCategoryName] = useState("");
   const [activeCardData, setActiveCardData] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [items, setItems] = useState([]);
+
+  const { history } = useSelector((state) => state.cardsReducer);
   const c = useSelector((state) => state.cardsReducer);
   const { categories } = c;
-  const categoryNames = Object.keys(categories);
 
+  const categoryNames = Object.keys(categories);
+  console.log(history);
   const moveCard = (moveTo, a, _cat) => {
-    console.log(a, _cat);
-    console.log(ref);
-    console.log(activeCategory);
+    // console.log(a, _cat);
+    // console.log(ref);
+    // console.log(activeCategory);
     // return;
     // return;
     dispatch(
@@ -63,11 +70,11 @@ const VideoContainer = () => {
         return {
           key: uuid(),
           label: (
-            <button
+            <span
               onClick={() => moveCard(_data, activeCardData, activeCategory)}
             >
               {_data}
-            </button>
+            </span>
           ),
         };
       });
@@ -75,12 +82,42 @@ const VideoContainer = () => {
     }
   }, [activeCategory]);
 
+  const showModal = () => {
+    console.log(isHistoryModalOpen);
+    setIsHistoryModalOpen(true);
+    console.log(isHistoryModalOpen);
+  };
+  const handleOk = () => {
+    setIsHistoryModalOpen(false);
+  };
+
   return (
     <div>
-      <ul>
+      <Modal
+        width={700}
+        title="History"
+        open={isHistoryModalOpen}
+        onOk={handleOk}
+      >
+        {history.map((data, i) => {
+          return (
+            <div className="history-container">
+              <span>{data.name}</span>
+              <span>
+                Time: {dayjs(data.date).format("{YYYY} MM-DDTHH:mm:ss A")}
+              </span>
+            </div>
+          );
+        })}
+      </Modal>
+      <ul className="categories-container">
         {categoryNames?.map((data, i) => {
           return (
-            <li key={i} onClick={() => handleActiveCategory(data)}>
+            <li
+              className="categories"
+              key={i}
+              onClick={() => handleActiveCategory(data)}
+            >
               {data}
             </li>
           );
@@ -88,9 +125,21 @@ const VideoContainer = () => {
       </ul>
       <div>
         <form onSubmit={addCategory}>
-          <input onChange={handleChange} value={tempCategoryName} />
+          <Input
+            className="category-input"
+            placeholder="Add category"
+            onChange={handleChange}
+            value={tempCategoryName}
+          />
         </form>
-        <button>History</button>
+        <Button
+          className="history-btn"
+          type="primary"
+          shape="circle"
+          onClick={showModal}
+        >
+          <HistoryOutlined />
+        </Button>
       </div>
       <div className="video-container">
         {activeCategory
